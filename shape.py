@@ -20,11 +20,20 @@ class Point:
         self._y = value
 
 
-point = Point(2, 3)
-print(point.x)
-print(point.y)
+class Shape: 
+    def __init__(self, x, y): 
 
-point.x = 10
-point.y = 20
-print(point.x)
-print(point.y)
+        """ 
+        Initialize a new shape. 
+        :param x: The x-coordinate of the top-left corner of the shape. 
+        :param y: The y-coordinate of the top-left corner of the shape. 
+        """ 
+        self.x = x 
+        self.y = y 
+
+    def area(self): 
+        raise NotImplementedError("Should be implemented") 
+
+    def perimeter(self): 
+        raise NotImplementedError("Should be implemented") 
+    
