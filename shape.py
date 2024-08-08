@@ -21,6 +21,15 @@ class Point:
     def y(self, value):
         self._y = value
 
+class MovableObject:
+    def move(self, dx, dy):
+        """
+        Move the object by dx and dy.
+        :param dx: Change in the x-coordinate.
+        :param dy: Change in the y-coordinate.
+        """
+        self.x += dx
+        self.y += dy
 
 class Shape: 
     def __init__(self, x, y): 
@@ -40,7 +49,19 @@ class Shape:
         raise NotImplementedError("Should be implemented") 
     
 
-class Rectangle(Shape):
+
+class MovableObject:
+    def move(self, dx, dy):
+        """
+        Move the object by dx and dy along the x and y axis respectively.
+        :param dx: Change in x-coordinate.
+        :param dy: Change in y-coordinate.
+        """
+        self.x += dx
+        self.y += dy
+
+
+class Rectangle(Shape, MovableObject):
     def __init__(self, x, y, width, height):
         """
         :param x: The x-coordinate of the top-left corner.
@@ -79,7 +100,7 @@ class Triangle(Shape):
 
     def circumference(self):
         return self._a + self._b + self._c
-    
+
 class Square(Rectangle):
     def __init__(self, x, y, side_length):
         """
@@ -88,6 +109,7 @@ class Square(Rectangle):
         :param side_length: The side length of the square.
         """
         super().__init__(x, y, side_length, side_length)
+        
 
 rectangle_A = Rectangle(0,0,10,5)
 print(f"rectangle_A has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
@@ -97,3 +119,5 @@ print(f"square_A has area : {square_A.area()} and circumference {square_A.circum
 
 triangle_A = Triangle(0,0,5,5,5)
 print(f"triangle_A has area : {triangle_A.area()} and circumference {triangle_A.circumference()}") 
+
+point = Point(1,6)
