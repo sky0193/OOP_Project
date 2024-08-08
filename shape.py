@@ -39,8 +39,9 @@ class Shape:
         :param x: The x-coordinate of the top-left corner of the shape. 
         :param y: The y-coordinate of the top-left corner of the shape. 
         """ 
-        self.x = x 
-        self.y = y 
+        self._x = x 
+        self._y = y 
+        self._on_ground = True if y == 0 else False
 
     def area(self): 
         raise NotImplementedError("Should be implemented") 
@@ -70,14 +71,51 @@ class Rectangle(Shape, MovableObject):
         :param height: The height of the rectangle.
         """
         super().__init__(x, y)
-        self._width = width
-        self._height = height
+        self.__width = width
+        self.__height = height
 
+    @property
+    def x(self):
+        return self._x
+    
+    @x.setter
+    def x(self, value):
+        self._x = value
+    
+    @property
+    def y(self):
+        return self._y
+    
+    @y.setter
+    def y(self, value):
+        self._y = value
+        self._on_ground = True if self._y == 0 else False
+        
+    @property
+    def width(self):
+        return self.__width
+
+    @width.setter
+    def width(self, value):
+        self.__width = value
+
+    @property
+    def height(self):
+        return self.__height
+
+    @height.setter
+    def height(self, value):
+        self.__height = value
+        
+    @property
+    def on_ground(self):
+        return self._on_ground
+        
     def area(self):
-        return self._width * self._height
+        return self.__width * self.__height
 
     def circumference(self):
-        return 2 * (self._width + self._height)
+        return 2 * (self.__width + self.__height)
 
 class Triangle(Shape):
     def __init__(self, x, y, a, b, c):
@@ -89,17 +127,17 @@ class Triangle(Shape):
         :param c: The length of side c.
         """
         super().__init__(x, y)
-        self._a = a
-        self._b = b
-        self._c = c
+        self.__a = a
+        self.__b = b
+        self.__c = c
 
     def area(self):
         # Satz des Herons
-        s = (self._a + self._b + self._c) / 2
-        return (s * (s - self._a) * (s - self._b) * (s - self._c)) ** 0.5
+        s = (self.__a + self.__b + self.__c) / 2
+        return (s * (s - self.__a) * (s - self.__b) * (s - self.__c)) ** 0.5
 
     def circumference(self):
-        return self._a + self._b + self._c
+        return self.__a + self.__b + self.__c
 
 class Square(Rectangle):
     def __init__(self, x, y, side_length):
@@ -111,8 +149,11 @@ class Square(Rectangle):
         super().__init__(x, y, side_length, side_length)
         
 
-rectangle_A = Rectangle(0,0,10,5)
-print(f"rectangle_A has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
+rectangle_A = Rectangle(10,0,10,5)
+print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
+print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} and is on_ground: {rectangle_A.on_ground} has heigth : {rectangle_A.height} and width {rectangle_A.width}")
+rectangle_A.move(2,2)
+print(f"rectangle_A was moved on position {rectangle_A.x}:{rectangle_A.y} and is on_ground:{rectangle_A.on_ground}")
 
 square_A = Square(0,0,5)
 print(f"square_A has area : {square_A.area()} and circumference {square_A.circumference()}") 
