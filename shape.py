@@ -1,9 +1,23 @@
 import math
 
 class Point:
-    def __init__(self, x=0, y=0):
+    def __init__(self, x, y):
+        self.set_cartesian(x, y)
+
+    def set_cartesian(self, x, y):
         self._x = x
         self._y = y
+        self._update_polar()
+
+    def get_cartesian(self):
+        return self._x, self._y
+
+    def get_polar(self):
+        return self._r, self._theta
+
+    def _update_polar(self):
+        self._r = math.sqrt(self._x**2 + self._y**2)
+        self._theta = math.degrees(math.atan2(self._y, self._x))
 
     @property
     def x(self):
@@ -12,6 +26,7 @@ class Point:
     @x.setter
     def x(self, value):
         self._x = value
+        self._update_polar()
 
     @property
     def y(self):
@@ -20,6 +35,7 @@ class Point:
     @y.setter
     def y(self, value):
         self._y = value
+        self._update_polar()       
 
 class MovableObject:
     def move(self, dx, dy):
@@ -39,9 +55,26 @@ class Shape:
         :param x: The x-coordinate of the top-left corner of the shape. 
         :param y: The y-coordinate of the top-left corner of the shape. 
         """ 
-        self._x = x 
-        self._y = y 
+        self._point = Point(x, y)
         self._on_ground = True if y == 0 else False
+
+    @property
+    def x(self):
+        return self._point.x
+
+    @x.setter
+    def x(self, value):
+        self._point.x = value
+
+    @property
+    def y(self):
+        return self._point.y
+
+    @y.setter
+    def y(self, value):
+        self._point.y = value
+        self._on_ground = True if self._point.y == 0 else False
+
 
     def area(self): 
         raise NotImplementedError("Should be implemented") 
@@ -74,23 +107,6 @@ class Rectangle(Shape, MovableObject):
         self.__width = width
         self.__height = height
 
-    @property
-    def x(self):
-        return self._x
-    
-    @x.setter
-    def x(self, value):
-        self._x = value
-    
-    @property
-    def y(self):
-        return self._y
-    
-    @y.setter
-    def y(self, value):
-        self._y = value
-        self._on_ground = True if self._y == 0 else False
-        
     @property
     def width(self):
         return self.__width
@@ -162,3 +178,4 @@ triangle_A = Triangle(0,0,5,5,5)
 print(f"triangle_A has area : {triangle_A.area()} and circumference {triangle_A.circumference()}") 
 
 point = Point(1,6)
+
