@@ -179,3 +179,14 @@ print(f"triangle_A has area : {triangle_A.area()} and circumference {triangle_A.
 
 point = Point(1,6)
 
+
+# Example for Polymorphism
+shapes = [
+    Rectangle(0, 0, 10, 20),
+    Square(5, 5, 15),
+    Triangle(10, 10, 3, 4, 5)
+]
+
+for shape in shapes:
+    print(f"Shape at ({shape.x}, {shape.y}) has an area of {shape.area()} and a circumference of {shape.circumference()}")
+
