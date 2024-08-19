@@ -133,10 +133,19 @@ class Rectangle(Shape, MovableObject):
 
     def circumference(self):
         return 2 * (self.__width + self.__height)
-    
+
+
+class GraphicalRectangle:
+    def __init__(self, rectangle):
+        """
+        :param rectangle: A Rectangle object to be drawn.
+        """
+        self.rectangle = rectangle
+
     def draw(self):
-        for i in range(self.__height):
-            print("*" * self.__width)
+        for i in range(self.rectangle.height):
+            print("*" * self.rectangle.width)
+
 
 class Triangle(Shape):
     def __init__(self, x, y, a, b, c):
@@ -170,13 +179,18 @@ class Square(Rectangle):
         super().__init__(x, y, side_length, side_length)
         
 
+def print_shape_info(shape: Shape):
+    print(f"Area: {shape.area()}")
+    print(f"Circumference: {shape.circumference()}")
+
 rectangle_A = Rectangle(10,0,10,5)
 print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
 print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} and is on_ground: {rectangle_A.on_ground} has heigth : {rectangle_A.height} and width {rectangle_A.width}")
 rectangle_A.move(2,2)
 print(f"rectangle_A was moved on position {rectangle_A.x}:{rectangle_A.y} and is on_ground:{rectangle_A.on_ground}")
 
-rectangle_A.draw()
+graf_rectangle = GraphicalRectangle(rectangle_A)
+graf_rectangle.draw()
 
 square_A = Square(0,0,5)
 print(f"square_A has area : {square_A.area()} and circumference {square_A.circumference()}") 
@@ -197,3 +211,10 @@ shapes = [
 for shape in shapes:
     print(f"Shape at ({shape.x}, {shape.y}) has an area of {shape.area()} and a circumference of {shape.circumference()}")
 
+ 
+
+rectangle = Rectangle(0, 0, 10, 5)  
+triangle = Triangle(0, 0, 3, 4, 5)  
+
+print_shape_info(rectangle)  
+print_shape_info(triangle)  
