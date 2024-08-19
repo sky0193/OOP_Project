@@ -201,50 +201,55 @@ def draw_shape(shape: DrawableShape):
     print(f"\nDrawing shape at ({shape.x}, {shape.y}):")
     shape.draw()
 
-rectangle_A = Rectangle(10,0,10,5)
-print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
-print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} and is on_ground: {rectangle_A.on_ground} has heigth : {rectangle_A.height} and width {rectangle_A.width}")
-rectangle_A.move(2,2)
-print(f"rectangle_A was moved on position {rectangle_A.x}:{rectangle_A.y} and is on_ground:{rectangle_A.on_ground}")
+def main():
+    rectangle_A = Rectangle(10,0,10,5)
+    print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
+    print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} and is on_ground: {rectangle_A.on_ground} has heigth : {rectangle_A.height} and width {rectangle_A.width}")
+    rectangle_A.move(2,2)
+    print(f"rectangle_A was moved on position {rectangle_A.x}:{rectangle_A.y} and is on_ground:{rectangle_A.on_ground}")
 
-graf_rectangle = GraphicalRectangle(rectangle_A)
-graf_rectangle.draw()
+    graf_rectangle = GraphicalRectangle(rectangle_A)
+    graf_rectangle.draw()
 
-square_A = Square(0,0,5)
-print(f"square_A has area : {square_A.area()} and circumference {square_A.circumference()}") 
+    square_A = Square(0,0,5)
+    print(f"square_A has area : {square_A.area()} and circumference {square_A.circumference()}") 
 
-triangle_A = Triangle(0,0,5,5,5)
-print(f"triangle_A has area : {triangle_A.area()} and circumference {triangle_A.circumference()}") 
+    triangle_A = Triangle(0,0,5,5,5)
+    print(f"triangle_A has area : {triangle_A.area()} and circumference {triangle_A.circumference()}") 
 
-point = Point(1,6)
-
-
-# Example for Polymorphism
-shapes = [
-    Rectangle(0, 0, 10, 20),
-    Square(5, 5, 15),
-    Triangle(10, 10, 3, 4, 5)
-]
-
-for shape in shapes:
-    print(f"Shape at ({shape.x}, {shape.y}) has an area of {shape.area()} and a circumference of {shape.circumference()}")
-
- 
-
-rectangle = Rectangle(0, 0, 10, 5)  
-triangle = Triangle(0, 0, 3, 4, 5)  
-
-print_shape_info(rectangle)  
-print_shape_info(triangle)  
+    point = Point(1,6)
 
 
-drawable_rectangle = DrawableRectangle(0, 0, 10, 5)
-print(f"DrawableRectangle at ({drawable_rectangle.x}, {drawable_rectangle.y}):")
-drawable_rectangle.draw()
+    # Example for Polymorphism
+    shapes = [
+        Rectangle(0, 0, 10, 20),
+        Square(5, 5, 15),
+        Triangle(10, 10, 3, 4, 5)
+    ]
 
-drawable_square = DrawableSquare(2, 2, 4)
-print(f"\nDrawableSquare at ({drawable_square.x}, {drawable_square.y}):")
-drawable_square.draw()
+    for shape in shapes:
+        print(f"Shape at ({shape.x}, {shape.y}) has an area of {shape.area()} and a circumference of {shape.circumference()}")
 
-draw_shape(drawable_rectangle)
-draw_shape(drawable_square)
+    
+
+    rectangle = Rectangle(0, 0, 10, 5)  
+    triangle = Triangle(0, 0, 3, 4, 5)  
+
+    print_shape_info(rectangle)  
+    print_shape_info(triangle)  
+
+
+    drawable_rectangle = DrawableRectangle(0, 0, 10, 5)
+    print(f"DrawableRectangle at ({drawable_rectangle.x}, {drawable_rectangle.y}):")
+    drawable_rectangle.draw()
+
+    drawable_square = DrawableSquare(2, 2, 4)
+    print(f"\nDrawableSquare at ({drawable_square.x}, {drawable_square.y}):")
+    drawable_square.draw()
+
+    draw_shape(drawable_rectangle)
+    draw_shape(drawable_square)
+
+
+if __name__ == '__main__':
+    main()
