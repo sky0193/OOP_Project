@@ -95,6 +95,7 @@ class MovableObject:
         self.y += dy
 
 
+
 class Rectangle(Shape, MovableObject):
     def __init__(self, x, y, width, height):
         """
@@ -132,6 +133,10 @@ class Rectangle(Shape, MovableObject):
 
     def circumference(self):
         return 2 * (self.__width + self.__height)
+    
+    def draw(self):
+        for i in range(self.__height):
+            print("*" * self.__width)
 
 class Triangle(Shape):
     def __init__(self, x, y, a, b, c):
@@ -170,6 +175,8 @@ print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} has area : {rect
 print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} and is on_ground: {rectangle_A.on_ground} has heigth : {rectangle_A.height} and width {rectangle_A.width}")
 rectangle_A.move(2,2)
 print(f"rectangle_A was moved on position {rectangle_A.x}:{rectangle_A.y} and is on_ground:{rectangle_A.on_ground}")
+
+rectangle_A.draw()
 
 square_A = Square(0,0,5)
 print(f"square_A has area : {square_A.area()} and circumference {square_A.circumference()}") 
