@@ -178,10 +178,28 @@ class Square(Rectangle):
         """
         super().__init__(x, y, side_length, side_length)
         
+class DrawableShape(Shape): 
+    def draw(self): 
+        raise NotImplementedError("Subclasses should implement this!") 
+
+class DrawableRectangle(Rectangle, DrawableShape): 
+    def draw(self): 
+        for i in range(self.height): 
+            print("*" * self.width) 
+
+class DrawableSquare(Square, DrawableShape): 
+    def draw(self): 
+        for i in range(self.height): 
+            print("*" * self.width) 
 
 def print_shape_info(shape: Shape):
     print(f"Area: {shape.area()}")
     print(f"Circumference: {shape.circumference()}")
+
+
+def draw_shape(shape: DrawableShape):
+    print(f"\nDrawing shape at ({shape.x}, {shape.y}):")
+    shape.draw()
 
 rectangle_A = Rectangle(10,0,10,5)
 print(f"rectangle_A on position {rectangle_A.x}:{rectangle_A.y} has area : {rectangle_A.area()} and circumference {rectangle_A.circumference()}") 
@@ -218,3 +236,15 @@ triangle = Triangle(0, 0, 3, 4, 5)
 
 print_shape_info(rectangle)  
 print_shape_info(triangle)  
+
+
+drawable_rectangle = DrawableRectangle(0, 0, 10, 5)
+print(f"DrawableRectangle at ({drawable_rectangle.x}, {drawable_rectangle.y}):")
+drawable_rectangle.draw()
+
+drawable_square = DrawableSquare(2, 2, 4)
+print(f"\nDrawableSquare at ({drawable_square.x}, {drawable_square.y}):")
+drawable_square.draw()
+
+draw_shape(drawable_rectangle)
+draw_shape(drawable_square)
